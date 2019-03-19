@@ -8,10 +8,11 @@ moves = ['rock', 'paper', 'scissors']
 """The Player class is the parent class for all of the Players
 in this game"""
 
+import random
 
 class Player:
     def move(self):
-        return 'rock'
+        return random.choice(moves)
 
     def learn(self, my_move, their_move):
         pass
