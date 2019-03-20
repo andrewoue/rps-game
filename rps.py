@@ -38,6 +38,11 @@ def beats(one, two):
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
 
+def select_opponent():
+    cpu_player_list = (RockPlayer, RandomPlayer)
+    cpu_player = random.choice(cpu_player_list)
+    return cpu_player()
+
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -77,5 +82,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Player(), RandomPlayer())
+    game = Game(Player(), select_opponent())
     game.play_game()
