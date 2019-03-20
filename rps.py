@@ -33,6 +33,12 @@ class Game:
         print(f"Player 1: {move1}  Player 2: {move2}")
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
+        if beats(move1, move2):
+            print("*** PLAYER ONE WINS ***")
+        elif beats(move2, move1):
+            print("*** PLAYER TWO WINS ***")
+        else:
+            print("*** IT'S A TIE ***")
 
     def play_game(self):
         print("Game start!")
