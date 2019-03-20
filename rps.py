@@ -17,6 +17,14 @@ class Player:
     def learn(self, my_move, their_move):
         pass
 
+class HumanPlayer(Player):
+    def move(self):
+        decision = input('Choose wisely... rock, paper, or scissors. ').lower()
+        while decision != "rock" and decision != "paper" and decision != "scissors":
+            print("I don't understand, please try again.")
+            decision = input('rock, paper, or scissors... ')
+        return decision
+
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
@@ -61,5 +69,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Player(), Player())
+    game = Game(HumanPlayer(), Player())
     game.play_game()
