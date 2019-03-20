@@ -26,6 +26,8 @@ class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
+        self.p1.score = 0
+        self.p2.score = 0
 
     def play_round(self):
         move1 = self.p1.move()
@@ -35,10 +37,13 @@ class Game:
         self.p2.learn(move2, move1)
         if beats(move1, move2):
             print("*** PLAYER ONE WINS ***")
+            self.p1.score += 1
         elif beats(move2, move1):
             print("*** PLAYER TWO WINS ***")
+            self.p2.score += 1
         else:
             print("*** IT'S A TIE ***")
+        print(f"The score is {self.p1.score} to {self.p2.score}")
 
     def play_game(self):
         print("Game start!")
