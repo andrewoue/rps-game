@@ -29,6 +29,10 @@ class RockPlayer(Player):
     def move(self):
         return moves[0]
 
+class RandomPlayer(Player):
+    def move(self):
+        return random.choice(moves)
+
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
@@ -73,5 +77,5 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game(Player(), RockPlayer())
+    game = Game(Player(), RandomPlayer())
     game.play_game()
