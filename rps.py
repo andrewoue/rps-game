@@ -57,6 +57,7 @@ class Game:
             print("*** PLAYER TWO WINS THE GAME ***")
         else:
             print("*** THIS GAME IS A TIE ***")
+        print(f"*** FINAL SCORE: {self.p1.score} TO {self.p2.score} ***")
 
 
 if __name__ == '__main__':
