@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#TODO add all CPU player classses to opponent selection
+
 """This program plays a game of Rock, Paper, Scissors between two Players,
 and reports both Player's scores each round."""
 
@@ -33,17 +35,25 @@ class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
 
+class CyclePlayer(Player):
+    def move(self):
+        print(Game.round_count)
+        return moves[Game.round_count]
+
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
 
 def select_opponent():
-    cpu_player_list = (RockPlayer, RandomPlayer)
+    cpu_player_list = (RockPlayer, RandomPlayer, CyclePlayer)
     cpu_player = random.choice(cpu_player_list)
     return cpu_player()
+#Random selection of CPU Player sub class
 
 class Game:
+    round_count = 0
+
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
@@ -65,6 +75,7 @@ class Game:
         else:
             print("*** IT'S A TIE ***")
         print(f"The score is {self.p1.score} to {self.p2.score}")
+        Game.round_count += 1
 
     def play_game(self):
         print("*** GAME START ***")
