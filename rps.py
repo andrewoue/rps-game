@@ -17,12 +17,10 @@ class Player:
     def learn(self, my_move, their_move):
         pass
 
-
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
-
 
 class Game:
     def __init__(self, p1, p2):
@@ -39,7 +37,7 @@ class Game:
     def play_game(self):
         print("Game start!")
         for round in range(3):
-            print(f"Round {round}:")
+            print(f"Round {round + 1}:")
             self.play_round()
         print("Game over!")
 
