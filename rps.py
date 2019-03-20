@@ -46,11 +46,11 @@ class Game:
         print(f"The score is {self.p1.score} to {self.p2.score}")
 
     def play_game(self):
-        print("Game start!")
+        print("*** GAME START ***")
         for round in range(3):
             print(f"Round {round + 1}:")
             self.play_round()
-        print("Game over!")
+        print("*** GAME OVER ***")
         if self.p1.score > self.p2.score:
             print("*** PLAYER ONE WINS THE GAME ***")
         elif self.p2.score > self.p1.score:
