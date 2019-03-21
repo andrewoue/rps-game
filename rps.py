@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
-#RPS Udacity Project 1.0, Andrew Ouellette
+# RPS Udacity Project 1.0, Andrew Ouellette
 
 """This program plays a game of Rock, Paper, Scissors between two Players,
 and reports both Player's scores each round."""
+
+import random
 
 moves = ['rock', 'paper', 'scissors']
 
 """The Player class is the parent class for all of the Players
 in this game"""
 
-import random
 
 class Player:
     def move(self):
@@ -18,31 +19,36 @@ class Player:
 
     def learn(self, my_move, their_move):
         pass
-#Parent Player Class
+# Parent Player Class
+
 
 class HumanPlayer(Player):
     def move(self):
-        decision = input("Choose wisely... rock, paper, or scissors. ").lower()
-        while decision != "rock" and decision != "paper" and decision != "scissors":
+        hpMove = input("Choose wisely... rock, paper, or scissors. ").lower()
+        while hpMove != "rock" and hpMove != "paper" and hpMove != "scissors":
             print("I don't understand, please try again.")
-            decision = input('rock, paper, or scissors... ')
-        return decision
-#Human Player class
+            hpMove = input('rock, paper, or scissors... ')
+        return hpMove
+# Human Player class
+
 
 class RockPlayer(Player):
     def move(self):
         return moves[0]
-#This Player class always selects rock
+# This Player class always selects rock
+
 
 class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
-#This Player class selects a random move
+# This Player class selects a random move
+
 
 class CyclePlayer(Player):
     def move(self):
         return moves[Game.round_count]
-#This Player class follows the order - rock, paper, scissors
+# This Player class follows the order - rock, paper, scissors
+
 
 class CopyPlayer(Player):
     def move(self):
@@ -56,18 +62,21 @@ class CopyPlayer(Player):
     def learn(self, my_move, their_move):
         my_move = Game.p2_move_list
         thier_move = Game.p1_move_list
-#This Player class copies the Human Player class selections
+# This Player class copies the Human Player class selections
+
 
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
             (one == 'scissors' and two == 'paper') or
             (one == 'paper' and two == 'rock'))
 
+
 def select_opponent():
     cpu_player_list = (RockPlayer, RandomPlayer, CyclePlayer, CopyPlayer)
     cpu_player = random.choice(cpu_player_list)
     return cpu_player()
-#Random selection of CPU Player sub class
+# Random selection of CPU Player sub class
+
 
 class Game:
     game_count = 0
@@ -87,7 +96,7 @@ class Game:
             print("I don't understand, please try again.")
             games = input("1 or 3? ")
         Game.game_count = int(games)
-    #Allows player to select between a single round or three rounds
+# Allows player to select between a single round or three rounds
 
     def play_round(self):
         move1 = self.p1.move()
@@ -119,6 +128,7 @@ class Game:
         else:
             print("*** THIS GAME IS A TIE ***")
         print(f"*** FINAL SCORE: {self.p1.score} TO {self.p2.score} ***")
+
 
 if __name__ == '__main__':
     game = Game(HumanPlayer(), select_opponent())
