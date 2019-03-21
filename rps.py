@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-#TODO add all CPU player classses to opponent selection
-
 """This program plays a game of Rock, Paper, Scissors between two Players,
 and reports both Player's scores each round."""
 
@@ -21,7 +19,7 @@ class Player:
 
 class HumanPlayer(Player):
     def move(self):
-        decision = input('Choose wisely... rock, paper, or scissors. ').lower()
+        decision = input("Choose wisely... rock, paper, or scissors. ").lower()
         while decision != "rock" and decision != "paper" and decision != "scissors":
             print("I don't understand, please try again.")
             decision = input('rock, paper, or scissors... ')
@@ -64,6 +62,7 @@ def select_opponent():
 #Random selection of CPU Player sub class
 
 class Game:
+    game_count = 0
     round_count = 0
     p1_move_list = []
     p2_move_list = []
@@ -74,14 +73,21 @@ class Game:
         self.p1.score = 0
         self.p2.score = 0
 
+    def game_select(self):
+        games = input("Let's play Rock, Paper, Scissors! 1 or 3 rounds? ")
+        while games != "1" and games != "3":
+            print("I don't understand, please try again.")
+            games = input("1 or 3? ")
+        Game.game_count = int(games)
+
     def play_round(self):
         move1 = self.p1.move()
         Game.p1_move_list.append(move1)
         move2 = self.p2.move()
         Game.p2_move_list.append(move2)
         print(f"Player 1: {move1}  Player 2: {move2}")
-        self.p1.learn(move1, move2)
-        self.p2.learn(move2, move1)
+        #self.p1.learn(move1, move2)
+        #self.p2.learn(move2, move1)
         if beats(move1, move2):
             print("*** PLAYER ONE WINS ***")
             self.p1.score += 1
@@ -95,7 +101,7 @@ class Game:
 
     def play_game(self):
         print("*** GAME START ***")
-        for round in range(3):
+        for round in range(self.game_count):
             print(f"Round {round + 1}:")
             self.play_round()
         print("*** GAME OVER ***")
@@ -110,4 +116,5 @@ class Game:
 
 if __name__ == '__main__':
     game = Game(Player(), select_opponent())
+    game.game_select()
     game.play_game()
