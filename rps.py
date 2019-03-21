@@ -37,8 +37,20 @@ class RandomPlayer(Player):
 
 class CyclePlayer(Player):
     def move(self):
-        print(Game.round_count)
         return moves[Game.round_count]
+
+class CopyPlayer(Player):
+    def move(self):
+        if Game.round_count == 0:
+            return random.choice(moves)
+        elif Game.round_count == 1:
+            return Game.p1_move_list[0]
+        else:
+            return Game.p1_move_list[1]
+
+    def learn(self, my_move, their_move):
+        my_move = Game.p2_move_list
+        thier_move = Game.p1_move_list
 
 def beats(one, two):
     return ((one == 'rock' and two == 'scissors') or
@@ -46,13 +58,15 @@ def beats(one, two):
             (one == 'paper' and two == 'rock'))
 
 def select_opponent():
-    cpu_player_list = (RockPlayer, RandomPlayer, CyclePlayer)
+    cpu_player_list = (RockPlayer, RandomPlayer, CyclePlayer, CopyPlayer)
     cpu_player = random.choice(cpu_player_list)
     return cpu_player()
 #Random selection of CPU Player sub class
 
 class Game:
     round_count = 0
+    p1_move_list = []
+    p2_move_list = []
 
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -62,7 +76,9 @@ class Game:
 
     def play_round(self):
         move1 = self.p1.move()
+        Game.p1_move_list.append(move1)
         move2 = self.p2.move()
+        Game.p2_move_list.append(move2)
         print(f"Player 1: {move1}  Player 2: {move2}")
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
