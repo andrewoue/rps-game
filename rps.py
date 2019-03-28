@@ -27,7 +27,7 @@ class HumanPlayer(Player):
         hpMove = input("Choose wisely... rock, paper, or scissors. ").lower()
         while hpMove != "rock" and hpMove != "paper" and hpMove != "scissors":
             print("I don't understand, please try again.")
-            hpMove = input('rock, paper, or scissors... ')
+            hpMove = input('rock, paper, or scissors... ').lower()
         return hpMove
 # Human Player class
 
